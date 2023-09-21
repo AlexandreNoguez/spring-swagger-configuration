@@ -20,7 +20,7 @@ repositories {
 
 /**
 			 versões do Swagger2 e SwaggerUI 
-			 versão do Gradle 8.0.2
+			 versão do Gradle 8.0.2 -- https://gradle.org/releases/
  */
 dependencies { 
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
@@ -31,5 +31,4 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
-	
 }

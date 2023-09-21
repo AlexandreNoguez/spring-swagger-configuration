@@ -16,8 +16,8 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("erpservice.alexandre"))
-                .paths(PathSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("erpservice.alexandre")) // caminho do pacote
+                .paths(PathSelectors.any()) // caminho dos endpoints
                 .build();
     }
 }
