@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 import erpservice.alexandre.entities.pk.PurchaseCustomer;
 import lombok.AllArgsConstructor;
@@ -22,8 +23,10 @@ import lombok.Setter;
 @Setter
 @Entity(name = "customers")
 public class CustomerEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE_CUSTOMER")
+    @SequenceGenerator(name = "SEQUENCE_CUSTOMER", sequenceName = "customers_customer_id_seq", allocationSize = 1)
     @Column(name = "customer_id")
     private Long idCustomer;
 

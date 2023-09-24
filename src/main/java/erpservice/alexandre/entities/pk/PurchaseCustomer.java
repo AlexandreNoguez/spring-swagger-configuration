@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,8 +26,11 @@ import lombok.Setter;
 @Setter
 @Entity(name = "purchase_customer")
 public class PurchaseCustomer {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE_PURCHASE_CUSTOMER")
+    @SequenceGenerator(name = "SEQUENCE_PURCHASE_CUSTOMER", sequenceName = "purchase_customer_purchase_customer_id_seq", allocationSize = 1)
+
     @Column(name = "purchase_customer_id")
     private Long idPurchase;
 
