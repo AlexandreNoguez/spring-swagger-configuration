@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "api.baseurl",
+      "type": "java.lang.String",
+      "description": "A common url part between all endpoints"
+    }
+  ]
+}
