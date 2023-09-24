@@ -1,59 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+                      http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="1" author="noguez">
-        <sql> 
-            CREATE TABLE purchases (
-  purchase_id bigint PRIMARY KEY,
-  description varchar(255),
-  type varchar(50),
-  purchased_at timestamp
-);
-
-CREATE TABLE products (
-  product_id bigint PRIMARY KEY,
-  product_name varchar(100),
-  description varchar(255),
-  price integer,
-  stock integer,
-  quantity integer
-);
-
-CREATE TABLE products_purchases (
-  products_purchases_id bigint PRIMARY KEY,
-  product_id bigint,
-  purchase_id bigint,
-  CONSTRAINT fk_products_purchases_product_id
-    FOREIGN KEY (product_id)
-      REFERENCES products(product_id),
-  CONSTRAINT fk_products_purchases_purchase_id
-    FOREIGN KEY (purchase_id)
-      REFERENCES purchases(purchase_id)
-);
-
-CREATE TABLE customers (
-  customer_id bigint PRIMARY KEY,
-  name varchar(50),
-  email varchar(50)
-);
-
-CREATE TABLE purchase_customer (
-  purchase_customer_id bigint PRIMARY KEY,
-  purchase_id bigint,
-  customer_id bigint,
-  CONSTRAINT fk_purchase_customer_customer_id
-    FOREIGN KEY (customer_id)
-      REFERENCES customers(customer_id),
-  CONSTRAINT fk_purchase_customer_purchase_id
-    FOREIGN KEY (purchase_id)
-      REFERENCES purchases(purchase_id)
-);
-
-        </sql>
-    </changeSet>
+  <changeSet id="1" author="noguez">
+    <sql> CREATE TABLE purchases ( purchase_id bigserial PRIMARY KEY, description varchar(255), type
+      varchar(50), purchased_at timestamp ); CREATE TABLE products ( product_id bigserial PRIMARY
+      KEY, product_name varchar(100), description varchar(255), price integer, stock integer,
+      quantity integer ); CREATE TABLE products_purchases ( products_purchases_id bigserial PRIMARY
+      KEY, product_id bigserial, purchase_id bigserial, CONSTRAINT fk_products_purchases_product_id
+      FOREIGN KEY (product_id) REFERENCES products(product_id), CONSTRAINT
+      fk_products_purchases_purchase_id FOREIGN KEY (purchase_id) REFERENCES purchases(purchase_id)
+      ); CREATE TABLE customers ( customer_id bigserial PRIMARY KEY, name varchar(50), email
+      varchar(50) ); CREATE TABLE purchase_customer ( purchase_customer_id bigserial PRIMARY KEY,
+      purchase_id bigserial, customer_id bigserial, CONSTRAINT fk_purchase_customer_customer_id
+      FOREIGN KEY (customer_id) REFERENCES customers(customer_id), CONSTRAINT
+      fk_purchase_customer_purchase_id FOREIGN KEY (purchase_id) REFERENCES purchases(purchase_id)
+      ); </sql>
+  </changeSet>
 </databaseChangeLog>
