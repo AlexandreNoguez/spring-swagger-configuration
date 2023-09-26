@@ -37,4 +37,16 @@ public class SwaggerConfig {
                 // .licenseUrl("https://www.exemplo.com/license")
                 .build();
     }
+
+    public ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("Protótipo de Sistema Gerencial de Produtos")
+                .description(
+                        "Esta API fornece uma interface para gerenciar produtos, vendas e clientes. A API é destinada a desenvolvedores. A API inclui endpoints para criar, ler, atualizar e excluir produtos, vendas e clientes.")
+                .version("1.0")
+                .termsOfServiceUrl("https://www.exemplo.com/terms")
+                .license("MIT")
+                .licenseUrl("https://www.exemplo.com/license")
+                .build();
+    }
 }
