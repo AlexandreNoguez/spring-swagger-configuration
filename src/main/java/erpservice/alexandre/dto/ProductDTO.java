@@ -19,6 +19,7 @@ public class ProductDTO {
     private String productDescription;
     private double productPrice;
     private int productStock;
+    private int quantity;
 
     public ProductDTO(ProductEntity productEntity) {
         BeanUtils.copyProperties(productEntity, this);
