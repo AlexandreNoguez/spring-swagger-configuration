@@ -1,14 +1,11 @@
 package erpservice.alexandre.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import erpservice.alexandre.dto.ProductCreateDTO;
 import erpservice.alexandre.dto.ProductDTO;
