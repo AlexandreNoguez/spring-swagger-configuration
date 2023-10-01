@@ -8,17 +8,20 @@
 
   <changeSet id="1" author="noguez">
     <sql> CREATE TABLE purchases ( purchase_id bigserial PRIMARY KEY, description varchar(255), type
-      varchar(50), purchased_at timestamp ); CREATE TABLE products ( product_id bigserial PRIMARY
-      KEY, product_name varchar(100), description varchar(255), price integer, stock integer,
-      quantity integer ); CREATE TABLE products_purchases ( products_purchases_id bigserial PRIMARY
-      KEY, product_id bigserial, purchase_id bigserial, CONSTRAINT fk_products_purchases_product_id
-      FOREIGN KEY (product_id) REFERENCES products(product_id), CONSTRAINT
-      fk_products_purchases_purchase_id FOREIGN KEY (purchase_id) REFERENCES purchases(purchase_id)
-      ); CREATE TABLE customers ( customer_id bigserial PRIMARY KEY, name varchar(50), email
-      varchar(50) ); CREATE TABLE purchase_customer ( purchase_customer_id bigserial PRIMARY KEY,
-      purchase_id bigserial, customer_id bigserial, CONSTRAINT fk_purchase_customer_customer_id
-      FOREIGN KEY (customer_id) REFERENCES customers(customer_id), CONSTRAINT
-      fk_purchase_customer_purchase_id FOREIGN KEY (purchase_id) REFERENCES purchases(purchase_id)
-      ); </sql>
+      varchar(50), purchased_at timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL ); CREATE TABLE
+      products ( product_id bigserial PRIMARY KEY, product_name varchar(100), description
+      varchar(255), price integer, stock integer, quantity integer, created_at timestamp DEFAULT
+      CURRENT_TIMESTAMP NOT NULL, updated_at timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL, image
+      bytea, image_filename varchar(255) ); CREATE TABLE products_purchases ( products_purchases_id
+      bigserial PRIMARY KEY, product_id bigserial, purchase_id bigserial, CONSTRAINT
+      fk_products_purchases_product_id FOREIGN KEY (product_id) REFERENCES products(product_id),
+      CONSTRAINT fk_products_purchases_purchase_id FOREIGN KEY (purchase_id) REFERENCES
+      purchases(purchase_id) ); CREATE TABLE customers ( customer_id bigserial PRIMARY KEY, name
+      varchar(50), email varchar(50), created_at timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+      updated_at timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL ); CREATE TABLE purchase_customer (
+      purchase_customer_id bigserial PRIMARY KEY, purchase_id bigserial, customer_id bigserial,
+      CONSTRAINT fk_purchase_customer_customer_id FOREIGN KEY (customer_id) REFERENCES
+      customers(customer_id), CONSTRAINT fk_purchase_customer_purchase_id FOREIGN KEY (purchase_id)
+      REFERENCES purchases(purchase_id) ); </sql>
   </changeSet>
 </databaseChangeLog>
