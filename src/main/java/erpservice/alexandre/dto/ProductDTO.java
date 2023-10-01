@@ -1,6 +1,9 @@
 package erpservice.alexandre.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.persistence.Column;
 
 import org.springframework.beans.BeanUtils;
 
@@ -20,6 +23,8 @@ public class ProductDTO {
     private double productPrice;
     private int productStock;
     private int quantity;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public ProductDTO(ProductEntity productEntity) {
         BeanUtils.copyProperties(productEntity, this);

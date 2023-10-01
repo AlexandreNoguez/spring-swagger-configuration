@@ -1,11 +1,14 @@
 package erpservice.alexandre.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import erpservice.alexandre.dto.ProductCreateDTO;
 import erpservice.alexandre.dto.ProductDTO;
@@ -24,6 +27,8 @@ public class ProductService {
     public ProductDTO createProduct(ProductCreateDTO productCreateDTO) {
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(productCreateDTO, productEntity);
+        productEntity.setCreatedAt(LocalDateTime.now());
+        productEntity.setUpdatedAt(LocalDateTime.now());
         return new ProductDTO(productRepository.save(productEntity));
     }
 
@@ -55,9 +60,24 @@ public class ProductService {
 
     public ProductDTO updateProduct(Long id, ProductCreateDTO createDTO) {
         Optional<ProductEntity> optionalProduct = productRepository.findById(id);
+
         if (optionalProduct.isPresent()) {
             ProductEntity productEntity = optionalProduct.get();
-            BeanUtils.copyProperties(createDTO, productEntity);
+
+            if (createDTO.getProductName() != null) {
+                productEntity.setProductName(createDTO.getProductName());
+            }
+            if (createDTO.getProductDescription() != null) {
+                productEntity.setProductDescription(createDTO.getProductDescription());
+            }
+            if (createDTO.getProductPrice() != 0.0) {
+                productEntity.setProductPrice(createDTO.getProductPrice());
+            }
+            if (createDTO.getProductStock() != 0) {
+                productEntity.setProductStock(createDTO.getProductStock());
+            }
+
+            productEntity.setUpdatedAt(LocalDateTime.now());
             ProductEntity updatedProduct = productRepository.save(productEntity);
             return new ProductDTO(updatedProduct);
         } else {
