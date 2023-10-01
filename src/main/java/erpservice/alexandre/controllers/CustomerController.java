@@ -29,7 +29,7 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerCreateDTO customerCreateDTO) {
         CustomerDTO createdCustomer = customerService.createCustomer(customerCreateDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
+        return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
 
     @GetMapping

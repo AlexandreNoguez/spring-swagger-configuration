@@ -1,5 +1,6 @@
 package erpservice.alexandre.entities;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -35,6 +36,12 @@ public class CustomerEntity {
 
     @Column(name = "email")
     private String customerEmail;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "purchaseCustomers", fetch = FetchType.LAZY)
     private Set<PurchaseCustomer> purchaseCustomers;

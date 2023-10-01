@@ -1,5 +1,6 @@
 package erpservice.alexandre.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,7 @@ import erpservice.alexandre.entities.CustomerEntity;
 import erpservice.alexandre.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 
-@Validated
+// @Validated
 @RequiredArgsConstructor
 @Service
 public class CustomerService {
@@ -23,8 +24,16 @@ public class CustomerService {
 
     public CustomerDTO createCustomer(CustomerCreateDTO customerCreateDTO) {
         CustomerEntity customerEntity = new CustomerEntity();
+        // customerEntity.setCustomerName(customerCreateDTO.getCustomerName());
+        // customerEntity.setCustomerEmail(customerCreateDTO.getCustomerEmail());
+
         BeanUtils.copyProperties(customerCreateDTO, customerEntity);
-        return new CustomerDTO(customerRepository.save(customerEntity));
+        customerEntity.setCreatedAt(LocalDateTime.now());
+        customerEntity.setUpdatedAt(LocalDateTime.now());
+        customerEntity = customerRepository.save(customerEntity);
+        CustomerDTO createdCustomer = new CustomerDTO(customerEntity);
+
+        return createdCustomer;
     }
 
     @Transactional
@@ -43,7 +52,14 @@ public class CustomerService {
         Optional<CustomerEntity> customerOptional = customerRepository.findById(customerId);
         if (customerOptional.isPresent()) {
             CustomerEntity customerEntity = customerOptional.get();
-            BeanUtils.copyProperties(customerCreateDTO, customerEntity);
+            if (customerCreateDTO.getCustomerEmail() != null) {
+                customerEntity.setCustomerEmail(customerCreateDTO.getCustomerEmail());
+            }
+            if (customerCreateDTO.getCustomerName() != null) {
+                customerEntity.setCustomerName(customerCreateDTO.getCustomerName());
+            }
+            customerEntity.setUpdatedAt(LocalDateTime.now());
+            // BeanUtils.copyProperties(customerCreateDTO, customerEntity);
             CustomerEntity updatedCustomer = customerRepository.save(customerEntity);
             return new CustomerDTO(updatedCustomer);
         }

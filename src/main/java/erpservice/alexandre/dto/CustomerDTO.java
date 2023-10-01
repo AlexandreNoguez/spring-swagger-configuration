@@ -1,5 +1,6 @@
 package erpservice.alexandre.dto;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +20,8 @@ public class CustomerDTO {
     private Long idCustomer;
     private String customerName;
     private String customerEmail;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Set<PurchaseCustomer> purchaseCustomers;
 
     public CustomerDTO(CustomerEntity custonerEntity) {
